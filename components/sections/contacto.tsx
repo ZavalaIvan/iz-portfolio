@@ -2,8 +2,9 @@
 
 import { useState } from "react"
 import { motion } from "framer-motion"
-import { Mail, Send, Github, Linkedin, Instagram, Code2, MessageCircle, ArrowUpRight, Copy, Check } from "lucide-react"
+import { Send, Github, Linkedin, Instagram, Code2, MessageCircle, ArrowUpRight, Copy, Check } from "lucide-react"
 import type { Locale } from "@/app/page"
+import { MailCheckIcon } from "@/components/ui/mail-check"
 
 const fadeUp = {
   initial: { opacity: 0, y: 20 },
@@ -55,7 +56,7 @@ export function ContactoSection({ locale }: { locale: Locale }) {
       <div className="flex flex-col gap-3">
         <motion.div {...fadeUp} transition={{ duration: 0.5, delay: 0.1 }} className="flex items-center gap-3">
           <div className="flex items-center justify-center h-9 w-9 rounded-md bg-accent text-foreground">
-            <Mail className="h-5 w-5" />
+            <MailCheckIcon size={20} />
           </div>
           <h1 className="text-2xl font-bold tracking-tight">{t.title}</h1>
         </motion.div>

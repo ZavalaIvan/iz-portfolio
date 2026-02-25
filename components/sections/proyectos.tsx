@@ -2,9 +2,13 @@
 
 import { useState, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
-import { ExternalLink, Github, Globe, Rocket, FlaskConical } from "lucide-react"
+import { ExternalLink, Github, Hand } from "lucide-react"
 import { QRCodeSVG } from "qrcode.react"
 import type { Locale } from "@/app/page"
+import { EarthIcon } from "@/components/ui/earth"
+import { LayoutPanelTopIcon } from "@/components/ui/layout-panel-top"
+import { RocketIcon } from "@/components/ui/rocket"
+import { AtomIcon } from "@/components/ui/atom"
 
 const fadeUp = {
   initial: { opacity: 0, y: 20 },
@@ -123,9 +127,10 @@ const projectsData: Record<Locale, Record<string, ProjectsSectionData>> = {
     "proyectos-sitios": {
       title: "Sitios Web",
       description: "Sitios web corporativos y de presentacion, optimizados para SEO y rendimiento.",
-      icon: <Globe className="h-5 w-5" />,
+      icon: <EarthIcon size={20} />,
       projects: [
         { name: "Exploracion visual de arquitectura con stack moderno (Next.js + React)", description: "Proyecto personal orientado a exploracion visual de arquitectura y fotografia arquitectonica, implementado con React y Next.js utilizando generacion de sitios estaticos (SSG) para optimizar performance y tiempos de carga. La interfaz se construyo con Tailwind CSS y componentes de shadcn/ui sobre Radix UI, priorizando composicion visual, jerarquia tipografica y layout responsive. Se integro analitica con GA4, optimizacion de carga de fuentes via Google Font API, y se configuro despliegue en SiteGround con Nginx como proxy reverso. El pipeline de desarrollo utiliza Turbopack y Priority Hints para mejorar la priorizacion de recursos criticos en el render inicial. El proyecto funciona como sandbox para probar arquitectura de frontend, performance en SSG y patrones de UI reutilizables para futuros proyectos productivos.", tech: ["Next.js", "React", "SSG", "Tailwind CSS", "shadcn/ui", "Radix UI", "Performance", "Nginx", "GA4"], status: "Demo", link: "https://ivanz88.sg-host.com/", preview: "https://i.imgur.com/ZSqN1vt.gif" },
+        { name: "Sistema web para agencia de marketing con frontend moderno y backend serverless", description: "Proyecto demo de sitio corporativo para agencia de marketing, implementado con React y Next.js (SSG/SSR hibrido) con arquitectura de frontend orientada a performance y escalabilidad. Se integro Supabase como backend ligero para manejo de datos, autenticacion basica y futuras extensiones de formularios/lead management. La UI se construyo con Tailwind CSS y componentes de shadcn/ui sobre Radix UI, priorizando consistencia visual, accesibilidad y reutilizacion de componentes. Se optimizo el render inicial con Priority Hints y se configuro pipeline de desarrollo con Turbopack. El proyecto incluye instrumentacion de eventos para redes de publicidad (DoubleClick Floodlight) y utilidades de frontend con Lodash para manejo de estado y transformacion de datos.", tech: ["Next.js", "React", "Supabase", "PostgreSQL", "Tailwind CSS", "shadcn/ui", "Radix UI", "SSG/SSR", "Performance", "Turbopack", "Ads Tracking"], status: "Demo", link: "https://marketing-web-template.vercel.app/", preview: "https://youtu.be/Qn7HhzGG5Vc" },
         { name: "Sistema de e-commerce interactivo para marca de moda", description: "Proyecto demo de e-commerce para marca de moda, implementado con React y Next.js (SSG), con arquitectura de frontend orientada a performance y motion UI. La experiencia integra animaciones complejas con GSAP para transiciones de secciones, estados de componentes y narrativa visual, y Lenis para scroll suave sincronizado con animaciones. Se implemento flujo de catalogo, galeria de producto y carrito de compra en frontend, con composicion modular de componentes reutilizables. Se optimizo el render inicial mediante Priority Hints, carga progresiva de media y control de ejecucion de animaciones en dispositivos moviles.", tech: ["Next.js", "React", "E-commerce", "GSAP", "Lenis", "Motion Design", "SSG", "Performance", "GA4", "Nginx"], status: "Demo", link: "https://ivanz92.sg-host.com/", preview: "https://youtu.be/HnEAPewnPX0" },
         { name: "Sistema de motion y layout dinamico para estudio creativo (Next.js)", description: "Proyecto demo para explorar motion design y narrativa visual en un sitio para despacho de interiorismo, implementado con React y Next.js (SSG). Se integraron animaciones con GSAP para control de timelines y transiciones entre secciones, y Lenis para scroll suave con sincronizacion de animaciones. El layout se construyo con flujos no lineales y componentes modulares, reutilizando patrones previos dentro del ecosistema de Next.js. Se priorizo performance en el render inicial mediante Priority Hints, carga progresiva de assets y control de ejecucion de animaciones en moviles, funcionando como laboratorio de UI/motion para prototipar interacciones reutilizables en proyectos productivos.", tech: ["Next.js", "React", "GSAP", "Lenis", "Motion Design", "SSG", "Performance", "Nginx", "GA4"], status: "Demo", link: "https://ivanz89.sg-host.com/", preview: "https://youtu.be/-2bu2h-BvPo" },
         { name: "Galeria minimalista para fotografia arquitectonica con scroll cinematico (GSAP)", description: "Proyecto demo enfocado en una galeria visual minimalista para presentar imagenes de gran formato y alto impacto visual. Implementado en HTML, CSS y JavaScript con scroll suave mediante Lenis y animaciones controladas con GSAP para reforzar la transicion entre escenas sin sobrecargar la interfaz. Se priorizo una composicion limpia, tipografia contenida y jerarquia visual enfocada en el contenido, con optimizacion de carga de imagenes y distribucion de assets via CDN (Cloudflare / jsDelivr / unpkg). Se integro GA4 para instrumentar navegacion basica dentro de la experiencia visual.", tech: ["HTML", "CSS", "JavaScript", "GSAP", "Lenis", "Minimal UI", "Image Gallery", "CDN", "GA4", "Performance"], status: "Demo", link: "https://ivanz90.sg-host.com/", preview: "https://youtu.be/8C29lbWuEvw" },
@@ -139,17 +144,18 @@ const projectsData: Record<Locale, Record<string, ProjectsSectionData>> = {
     "proyectos-apps": {
       title: "Apps Web",
       description: "Aplicaciones web completas, listas para produccion.",
-      icon: <Globe className="h-5 w-5" />,
+      icon: <LayoutPanelTopIcon size={20} />,
       projects: [
-        { name: "SaaS Dashboard", description: "Panel de control para gestion de suscripciones y metricas de negocio en tiempo real.", tech: ["Next.js", "TypeScript", "Supabase", "Stripe"], status: "Produccion", link: "#", preview: "/gifs/web-template.gif" },
-        { name: "E-commerce Headless", description: "Tienda online con CMS headless, pasarela de pago y gestion de inventario automatizada.", tech: ["React", "Node.js", "PostgreSQL", "Tailwind"], status: "Produccion", link: "#", preview: "/gifs/web-template.gif" },
-        { name: "Plataforma de Reservas", description: "Sistema de reservas con calendario interactivo, notificaciones y pagos integrados.", tech: ["Next.js", "Prisma", "Resend", "Vercel"], status: "Produccion", link: "#", preview: "/gifs/web-template.gif" },
+        { name: "Web app todo-en-uno para gestion de barberias/esteticas", description: "Web app demo de gestion integral para barberias y esteticas, implementada con React y Next.js como frontend principal, orientada a centralizar agendamiento, POS, CRM e inventario en una sola interfaz. La arquitectura prioriza flujos de reserva rapidos y de baja friccion para usuarios sin perfil tecnico, con navegacion clara y componentes reutilizables. La UI se construyo con Tailwind CSS y shadcn/ui sobre Radix UI, priorizando accesibilidad, consistencia visual y escalabilidad del sistema de componentes. Se optimizo el rendimiento con Priority Hints y pipeline de desarrollo con Turbopack. El despliegue se realizo en Vercel con politicas de seguridad (HSTS) y analitica via Vercel Analytics para instrumentar flujos de conversion dentro de la app.", tech: ["Next.js", "React", "Web App", "Booking System", "POS", "CRM", "Tailwind CSS", "shadcn/ui", "Radix UI", "Vercel", "Performance", "Security"], status: "Demo", link: "https://barber-shop-full-system.vercel.app/", preview: "https://youtu.be/PflAV4jWCtI" },
+        { name: "Web Arquitectura de plataforma educativa con roles y flujos multi-perfil", description: "Web app demo de academia digital implementada con React y Next.js, con arquitectura de frontend orientada a manejar flujos diferenciados por rol (alumno, docente y administrador) dentro de una misma base de componentes. Se disenaron dashboards con estados de progreso, cursos activos, tareas y clases en vivo, priorizando claridad de informacion y baja friccion de uso para perfiles no tecnicos. La UI se construyo con Tailwind CSS y shadcn/ui sobre Radix UI para mantener consistencia visual y accesibilidad en multiples vistas. El despliegue se realizo en Vercel con HSTS y analitica via Vercel Analytics para instrumentar navegacion entre modulos y eventos clave dentro de la plataforma. La arquitectura esta preparada para escalar a integraciones de backend (auth, pagos, contenidos) sin reestructurar el frontend.", tech: ["Next.js", "React", "Web App", "Role-based UI", "Dashboards", "Tailwind CSS", "shadcn/ui", "Radix UI", "Vercel", "HSTS", "Analytics"], status: "Demo", link: "https://marketing-digital-academia.vercel.app/", preview: "https://youtu.be/QWK92JBAACg" },
+        { name: "Sistema de gestion de membresias para negocios de fitness con multi-usuarios", description: "Web app demo para gestion de membresias en negocios de fitness/health, implementada con React y Next.js, con arquitectura orientada a multi-tenant para permitir multiples negocios y usuarios dentro de la misma base de aplicacion. Se disenaron flujos de administracion de miembros, afiliaciones y visualizacion de metricas, priorizando claridad de uso para perfiles no tecnicos. La UI se construyo con Tailwind CSS y shadcn/ui sobre Radix UI, con componentes reutilizables para paneles administrativos y vistas de usuario. Se integraron visualizaciones con Recharts para metricas basicas, se optimizo el render inicial con Priority Hints y se desplego en Vercel con HSTS, manteniendo un pipeline de desarrollo con Turbopack orientado a iteracion rapida.", tech: ["Next.js", "React", "Web App", "Multi-tenant", "Membership System", "Dashboards", "Recharts", "Tailwind CSS", "shadcn/ui", "Radix UI", "Vercel", "HSTS", "Performance"], status: "Demo", link: "https://membership-system-fitness.vercel.app/", preview: "https://youtu.be/x8HUsnPW0_k" },
+        { name: "Plataforma de loyalty con niveles VIP y cupones para negocios fisicos", description: "Web app demo de fidelizacion para clientes recurrentes en negocios fisicos, implementada con React y Next.js, orientada a registrar visitas mediante QR y habilitar flujos de recompensas, cupones e historial de consumo. La arquitectura prioriza flujos de interaccion rapidos en mobile, con estados claros de progreso y validacion visual del escaneo. Se diseno un sistema de gamificacion con niveles VIP, progresion por visitas y desbloqueo de incentivos, modelado en componentes reutilizables dentro del frontend. La UI se construyo con Tailwind CSS y shadcn/ui sobre Radix UI, priorizando accesibilidad y consistencia visual. Se optimizo performance con Priority Hints y se desplego en Vercel con HSTS y Vercel Analytics para instrumentar eventos de uso (escaneos, canjes, progreso de nivel).", tech: ["Next.js", "React", "Web App", "Multi-tenant", "Membership System", "Dashboards", "Recharts", "Tailwind CSS", "shadcn/ui", "Radix UI", "Vercel", "HSTS", "Performance"], status: "Demo", link: "https://app-fidelidad-barberia.vercel.app/", preview: "https://youtu.be/mrQORiHabVs" },
       ],
     },
     "proyectos-mvps": {
       title: "MVPs",
       description: "Productos minimos viables entregados en tiempo record.",
-      icon: <Rocket className="h-5 w-5" />,
+      icon: <RocketIcon size={20} />,
       projects: [
         { name: "ValidaBot", description: "Herramienta de validacion de ideas de negocio con encuestas automatizadas y analisis de mercado.", tech: ["Next.js", "OpenAI", "Supabase"], status: "Beta", link: "#" },
         { name: "QuickInvoice", description: "Generador de facturas para freelancers con envio automatico y tracking de pagos.", tech: ["React", "Node.js", "PDF", "Stripe"], status: "Lanzado", link: "#" },
@@ -159,7 +165,7 @@ const projectsData: Record<Locale, Record<string, ProjectsSectionData>> = {
     "proyectos-experimentos": {
       title: "Experimentos",
       description: "Exploraciones tecnicas y proyectos personales.",
-      icon: <FlaskConical className="h-5 w-5" />,
+      icon: <AtomIcon size={20} />,
       projects: experimentsEs,
     },
   },
@@ -167,7 +173,7 @@ const projectsData: Record<Locale, Record<string, ProjectsSectionData>> = {
     "proyectos-sitios": {
       title: "Websites",
       description: "Corporate and marketing websites optimized for SEO and performance.",
-      icon: <Globe className="h-5 w-5" />,
+      icon: <EarthIcon size={20} />,
       projects: [
         { name: "TechCorp Corporate Website", description: "Corporate website with integrated CMS, multilingual support, and advanced SEO optimization.", tech: ["Next.js", "TypeScript", "TailwindCSS", "Strapi CMS"], status: "Production", link: "#", preview: "/gifs/web-template.gif" },
         { name: "Design Portfolio", description: "Professional digital portfolio with interactive gallery, animation, and direct contact.", tech: ["React", "Framer Motion", "Tailwind", "SendGrid"], status: "Production", link: "#", preview: "/gifs/web-template.gif" },
@@ -177,7 +183,7 @@ const projectsData: Record<Locale, Record<string, ProjectsSectionData>> = {
     "proyectos-apps": {
       title: "Web Apps",
       description: "Complete web applications ready for production.",
-      icon: <Globe className="h-5 w-5" />,
+      icon: <LayoutPanelTopIcon size={20} />,
       projects: [
         { name: "SaaS Dashboard", description: "Control panel for subscriptions and real-time business metrics.", tech: ["Next.js", "TypeScript", "Supabase", "Stripe"], status: "Production", link: "#", preview: "/gifs/web-template.gif" },
         { name: "Headless Ecommerce", description: "Online store with headless CMS, payment gateway, and automated inventory management.", tech: ["React", "Node.js", "PostgreSQL", "Tailwind"], status: "Production", link: "#", preview: "/gifs/web-template.gif" },
@@ -187,7 +193,7 @@ const projectsData: Record<Locale, Record<string, ProjectsSectionData>> = {
     "proyectos-mvps": {
       title: "MVPs",
       description: "Minimum viable products delivered in record time.",
-      icon: <Rocket className="h-5 w-5" />,
+      icon: <RocketIcon size={20} />,
       projects: [
         { name: "ValidaBot", description: "Business idea validation tool with automated surveys and market analysis.", tech: ["Next.js", "OpenAI", "Supabase"], status: "Beta", link: "#" },
         { name: "QuickInvoice", description: "Invoice generator for freelancers with automated sending and payment tracking.", tech: ["React", "Node.js", "PDF", "Stripe"], status: "Launched", link: "#" },
@@ -197,7 +203,7 @@ const projectsData: Record<Locale, Record<string, ProjectsSectionData>> = {
     "proyectos-experimentos": {
       title: "Experiments",
       description: "Technical explorations and personal projects.",
-      icon: <FlaskConical className="h-5 w-5" />,
+      icon: <AtomIcon size={20} />,
       projects: experimentsEn,
     },
   },
@@ -210,13 +216,27 @@ export function ProyectosSection({ type, locale }: { type: "proyectos-sitios" | 
   const [hoveredProject, setHoveredProject] = useState<string | null>(null)
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
   const [isMobile, setIsMobile] = useState(false)
+  const [isCompact, setIsCompact] = useState(false)
+  const [activeTouchHint, setActiveTouchHint] = useState(0)
 
   useEffect(() => {
-    const check = () => setIsMobile(typeof window !== "undefined" ? window.innerWidth < 768 : false)
+    const check = () => {
+      if (typeof window === "undefined") return
+      setIsMobile(window.innerWidth < 768)
+      setIsCompact(window.innerWidth < 1024)
+    }
     check()
     window.addEventListener("resize", check)
     return () => window.removeEventListener("resize", check)
   }, [])
+
+  useEffect(() => {
+    if (!showQR || !isCompact || isExperiments || data.projects.length === 0 || hoveredProject) return
+    const interval = window.setInterval(() => {
+      setActiveTouchHint((prev) => (prev + 1) % data.projects.length)
+    }, 2200)
+    return () => window.clearInterval(interval)
+  }, [data.projects.length, hoveredProject, isCompact, isExperiments, showQR])
 
   return (
     <div className="flex flex-col gap-10 py-8">
@@ -234,12 +254,13 @@ export function ProyectosSection({ type, locale }: { type: "proyectos-sitios" | 
         {data.projects.map((project, i) => {
           const youtubePreviewUrl = getYouTubePreviewEmbedUrl(project.preview)
           const previewAlt = locale === "en" ? `Preview of ${project.name}` : `Preview de ${project.name}`
+          const isActiveHintCard = showQR && isCompact && (activeTouchHint === i || hoveredProject === project.name)
 
           return isExperiments && !project.embedUrl ? null : <motion.div
             key={`${type}-${project.name}-${i}`}
             {...fadeUp}
             transition={{ duration: 0.4, delay: 0.15 * (i + 1) }}
-            className={`group relative flex ${showQR ? "flex-col lg:flex-row lg:gap-6 gap-4" : "flex-col gap-4"} ${isExperiments ? "overflow-hidden rounded-2xl border border-border/70 bg-card/70 p-0 hover:border-primary/40" : "p-5 rounded-lg border border-border bg-card hover:border-muted-foreground/20"} transition-all duration-300`}
+            className={`group relative flex ${showQR ? "flex-col lg:flex-row lg:gap-6 gap-4" : "flex-col gap-4"} ${isExperiments ? "overflow-hidden rounded-2xl border border-border/70 bg-card/70 p-0 hover:border-primary/40" : "p-5 rounded-lg border border-border bg-card hover:border-muted-foreground/20"} ${isActiveHintCard && !isExperiments ? "ring-1 ring-primary/35 border-primary/30" : ""} transition-all duration-300`}
             onMouseEnter={() => (showQR && !isMobile) && setHoveredProject(project.name)}
             onMouseLeave={() => {
               if (showQR && !isMobile) setHoveredProject(null)
@@ -371,13 +392,36 @@ export function ProyectosSection({ type, locale }: { type: "proyectos-sitios" | 
                 </div>
               </div>
             ) : (
-              <div className="flex-1 flex flex-col gap-4">
-                <div className="flex items-start justify-between gap-4">
-                  <div className="flex flex-col gap-1.5">
-                    <h3 className="text-base font-semibold text-foreground group-hover:text-primary transition-colors">{project.name}</h3>
-                    <span className="inline-flex items-center px-2 py-0.5 text-[11px] font-mono rounded-sm bg-accent text-muted-foreground w-fit">{project.status}</span>
-                  </div>
-                  <div className="flex items-center gap-2">
+                <div className="flex-1 flex flex-col gap-4">
+                  <div className="flex items-start justify-between gap-4">
+                    <div className="flex flex-col gap-1.5">
+                      <h3 className="text-base font-semibold text-foreground group-hover:text-primary transition-colors">{project.name}</h3>
+                      <span className="inline-flex items-center px-2 py-0.5 text-[11px] font-mono rounded-sm bg-accent text-muted-foreground w-fit">{project.status}</span>
+                      {showQR && isCompact && isActiveHintCard && (
+                        <div className="mt-1 inline-flex items-center gap-1.5 rounded-full border border-primary/25 bg-primary/10 px-2 py-1">
+                          <div className="relative h-5 w-5">
+                          <motion.span
+                            aria-hidden="true"
+                            initial={{ scale: 0.7, opacity: 0.55 }}
+                            animate={{ scale: [0.7, 1.35], opacity: [0.55, 0] }}
+                            transition={{ duration: 1.15, repeat: Infinity, ease: "easeOut" }}
+                            className="absolute inset-0 rounded-full border border-primary/40"
+                          />
+                          <motion.span
+                            aria-hidden="true"
+                            initial={{ y: 0, scale: 1 }}
+                            animate={{ y: [0, 2, 0], scale: [1, 0.94, 1] }}
+                            transition={{ duration: 0.85, repeat: Infinity, ease: "easeInOut" }}
+                            className="absolute inset-0 flex items-center justify-center rounded-full bg-primary/10 text-primary"
+                          >
+                            <Hand className="h-3.5 w-3.5" />
+                          </motion.span>
+                          </div>
+                          <span className="text-[10px] font-mono uppercase tracking-wide text-primary">Tap</span>
+                        </div>
+                      )}
+                    </div>
+                    <div className="flex items-center gap-2">
                     {project.link && (
                       <a
                         href={project.link}

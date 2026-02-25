@@ -2,9 +2,10 @@
 
 import { useEffect, useMemo, useRef, useState } from "react"
 import { motion } from "framer-motion"
-import { User, MapPin, Calendar, Code2 } from "lucide-react"
+import { MapPin, Calendar, Code2 } from "lucide-react"
 import { useTheme } from "next-themes"
 import type { Locale } from "@/app/page"
+import { UserIcon } from "@/components/ui/user"
 
 const fadeUp = {
   initial: { opacity: 0, y: 20 },
@@ -365,7 +366,7 @@ export function SobreMiSection({ locale }: { locale: Locale }) {
       <div className="flex flex-col gap-6">
         <motion.div {...fadeUp} transition={{ duration: 0.5, delay: 0.1 }} className="flex items-center gap-3">
           <div className="flex items-center justify-center h-9 w-9 rounded-md bg-accent text-foreground">
-            <User className="h-5 w-5" />
+            <UserIcon size={20} />
           </div>
           <h1 className="text-2xl font-bold tracking-tight">{t.title}</h1>
         </motion.div>

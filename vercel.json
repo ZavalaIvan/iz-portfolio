@@ -1,6 +1,10 @@
 {
   "rewrites": [
     {
+      "source": "/barber/_next/:path*",
+      "destination": "https://v0-barber-shop-booking-system-six.vercel.app/_next/:path*"
+    },
+    {
       "source": "/barber/:path*",
       "destination": "https://v0-barber-shop-booking-system-six.vercel.app/:path*"
     }

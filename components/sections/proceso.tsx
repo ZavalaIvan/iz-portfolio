@@ -2,8 +2,10 @@
 
 import { useState } from "react"
 import { motion } from "framer-motion"
-import { Workflow, DollarSign, ArrowRight, Phone } from "lucide-react"
+import { ArrowRight, Phone } from "lucide-react"
 import type { Locale } from "@/app/page"
+import { WorkflowIcon } from "@/components/ui/workflow"
+import { DollarSignIcon } from "@/components/ui/dollar-sign"
 
 const fadeUp = {
   initial: { opacity: 0, y: 20 },
@@ -184,7 +186,7 @@ export function MetodologiaSection({ locale }: { locale: Locale }) {
       <div className="flex flex-col gap-3">
         <motion.div {...fadeUp} transition={{ duration: 0.5, delay: 0.1 }} className="flex items-center gap-3">
           <div className="flex items-center justify-center h-9 w-9 rounded-md bg-accent text-foreground">
-            <Workflow className="h-5 w-5" />
+            <WorkflowIcon size={20} />
           </div>
           <h1 className="text-2xl font-bold tracking-tight">{locale === "en" ? "Methodology" : "Metodologia"}</h1>
         </motion.div>
@@ -231,7 +233,7 @@ export function PreciosSection({ onNavigate, locale }: { onNavigate: (section: s
       <div className="flex flex-col gap-3">
         <motion.div {...fadeUp} transition={{ duration: 0.5, delay: 0.1 }} className="flex items-center gap-3">
           <div className="flex items-center justify-center h-9 w-9 rounded-md bg-accent text-foreground">
-            <DollarSign className="h-5 w-5" />
+            <DollarSignIcon size={20} />
           </div>
           <h1 className="text-2xl font-bold tracking-tight">{locale === "en" ? "Pricing / Models" : "Precios / Modelos"}</h1>
         </motion.div>

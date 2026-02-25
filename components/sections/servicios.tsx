@@ -1,8 +1,11 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { Zap, Wrench, HeadphonesIcon, Check, ArrowRight, Palette, PenTool, Sparkles, Clapperboard } from "lucide-react"
+import { Check, ArrowRight, Palette, PenTool, Sparkles, Clapperboard } from "lucide-react"
 import type { Locale } from "@/app/page"
+import { ZapIcon } from "@/components/ui/zap"
+import { WrenchIcon } from "@/components/ui/wrench"
+import { AudioLinesIcon } from "@/components/ui/audio-lines"
 
 const fadeUp = {
   initial: { opacity: 0, y: 20 },
@@ -35,7 +38,7 @@ const getServiciosData = (locale: Locale): Record<string, ServiceData> => ({
   "servicios-mvps": {
     title: locale === "en" ? "MVP Development" : "Desarrollo de MVPs",
     subtitle: locale === "en" ? "From idea to functional product" : "De idea a producto funcional",
-    icon: <Zap className="h-5 w-5" />,
+    icon: <ZapIcon size={20} />,
     description:
       locale === "en"
         ? "I build your minimum viable product with the right technology, focused on validating your business idea quickly without sacrificing quality."
@@ -63,7 +66,7 @@ const getServiciosData = (locale: Locale): Record<string, ServiceData> => ({
   "servicios-automatizacion": {
     title: locale === "en" ? "Automation" : "Automatizacion",
     subtitle: locale === "en" ? "Less manual work, more outcomes" : "Menos trabajo manual, mas resultados",
-    icon: <Wrench className="h-5 w-5" />,
+    icon: <WrenchIcon size={20} />,
     description:
       locale === "en"
         ? "I automate repetitive business processes, from tool integrations to complete workflows that save hours every day."
@@ -91,7 +94,7 @@ const getServiciosData = (locale: Locale): Record<string, ServiceData> => ({
   "servicios-soporte": {
     title: locale === "en" ? "Technical Support" : "Soporte Tecnico",
     subtitle: locale === "en" ? "Your product always running" : "Tu producto siempre funcionando",
-    icon: <HeadphonesIcon className="h-5 w-5" />,
+    icon: <AudioLinesIcon size={20} />,
     description:
       locale === "en"
         ? "Continuous maintenance, incremental improvements, and technical support to keep your digital product running smoothly."
