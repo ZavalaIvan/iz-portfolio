@@ -254,10 +254,10 @@ export function ServiciosSection({ type, onNavigate, locale }: { type: "servicio
 
           {type === "servicios-mvps" && (
             <button
-              onClick={() => onNavigate("proyectos-mvps")}
+              onClick={() => onNavigate("proyectos-apps")}
               className="flex items-center gap-2 bg-secondary text-secondary-foreground px-5 py-2.5 rounded-md text-sm font-medium hover:bg-secondary/80 transition-colors"
             >
-              {locale === "en" ? "See MVP examples" : "Ver ejemplos de MVP"}
+              {locale === "en" ? "See app examples" : "Ver ejemplos de apps"}
             </button>
           )}
         </div>

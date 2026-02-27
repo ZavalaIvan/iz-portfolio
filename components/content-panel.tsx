@@ -29,8 +29,10 @@ export function ContentPanel({ activeSection, onNavigate, locale }: ContentPanel
         return <ProyectosSection type="proyectos-sitios" locale={locale} />
       case "proyectos-apps":
         return <ProyectosSection type="proyectos-apps" locale={locale} />
-      case "proyectos-mvps":
-        return <ProyectosSection type="proyectos-mvps" locale={locale} />
+      case "proyectos-ai-tools":
+        return <ProyectosSection type="proyectos-ai-tools" locale={locale} />
+      // case "proyectos-mvps":
+      //   return <ProyectosSection type="proyectos-mvps" locale={locale} />
       case "proyectos-experimentos":
         return <ProyectosSection type="proyectos-experimentos" locale={locale} />
       case "servicios-mvps":
