@@ -63,7 +63,7 @@ const getNavItems = (locale: Locale): NavItem[] => [
     children: [
       { id: "proyectos-sitios", label: locale === "en" ? "Websites" : "Sitios web", icon: EarthIcon, iconSize: 14 },
       { id: "proyectos-apps", label: locale === "en" ? "Web apps" : "Apps web", icon: LayoutPanelTopIcon, iconSize: 14 },
-      { id: "proyectos-ai-tools", label: "AI Tools", icon: AtomIcon, iconSize: 14 },
+      { id: "proyectos-ai-tools", label: locale === "en" ? "AI Tools" : "Herramientas IA", icon: AtomIcon, iconSize: 14 },
       // { id: "proyectos-mvps", label: "MVPs", icon: RocketIcon, iconSize: 14 },
       { id: "proyectos-experimentos", label: locale === "en" ? "Experiments" : "Experimentos", icon: RocketIcon, iconSize: 14 },
     ],

@@ -156,7 +156,7 @@ const projectsData: Record<Locale, Record<string, ProjectsSectionData>> = {
       ],
     },
     "proyectos-ai-tools": {
-      title: "AI Tools",
+      title: "Herramientas IA",
       description: "Herramientas impulsadas por IA para resolver tareas especificas con flujos claros y accionables.",
       icon: <AtomIcon size={20} />,
       projects: [
@@ -438,7 +438,9 @@ export function ProyectosSection({ type, locale }: { type: "proyectos-sitios" | 
                             <Hand className="h-3.5 w-3.5" />
                           </motion.span>
                           </div>
-                          <span className="text-[10px] font-mono uppercase tracking-wide text-primary">Tap</span>
+                          <span className="text-[10px] font-mono uppercase tracking-wide text-primary">
+                            {locale === "en" ? "Tap" : "Toca"}
+                          </span>
                         </div>
                       )}
                     </div>
