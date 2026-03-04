@@ -239,6 +239,7 @@ export function ProyectosSection({ type, locale }: { type: "proyectos-sitios" | 
   const [isMobile, setIsMobile] = useState(false)
   const [isCompact, setIsCompact] = useState(false)
   const [activeTouchHint, setActiveTouchHint] = useState(0)
+  const [qrReadCounts, setQrReadCounts] = useState<Record<string, number>>({})
 
   useEffect(() => {
     const check = () => {
@@ -258,6 +259,50 @@ export function ProyectosSection({ type, locale }: { type: "proyectos-sitios" | 
     }, 2200)
     return () => window.clearInterval(interval)
   }, [data.projects.length, hoveredProject, isCompact, isExperiments, showQR])
+
+  const getProjectQrKey = (project: Project) => project.link || `${type}:${project.name}`
+
+  const loadQrReads = async () => {
+    if (!showQR || isExperiments || data.projects.length === 0) return
+    const keys = data.projects.map((project) => getProjectQrKey(project)).join(",")
+
+    try {
+      const response = await fetch(`/api/qr-reads?keys=${encodeURIComponent(keys)}`, { method: "GET" })
+      if (!response.ok) return
+      const payload = (await response.json()) as { counts?: Record<string, number> }
+      if (payload.counts) setQrReadCounts(payload.counts)
+    } catch {
+      // Keep UI functional if counting service fails
+    }
+  }
+
+  useEffect(() => {
+    void loadQrReads()
+  }, [type, showQR, isExperiments, locale])
+
+  const incrementQrReads = (project: Project) => {
+    const key = getProjectQrKey(project)
+    void fetch("/api/qr-reads", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ key }),
+    })
+      .then(async (response) => {
+        if (!response.ok) return null
+        return (await response.json()) as { count?: number }
+      })
+      .then((payload) => {
+        if (typeof payload?.count === "number") {
+          setQrReadCounts((prev) => ({ ...prev, [key]: payload.count as number }))
+          return
+        }
+
+        setQrReadCounts((prev) => ({ ...prev, [key]: (prev[key] || 0) + 1 }))
+      })
+      .catch(() => {
+        setQrReadCounts((prev) => ({ ...prev, [key]: (prev[key] || 0) + 1 }))
+      })
+  }
 
   return (
     <div className="flex flex-col gap-10 py-8">
@@ -299,8 +344,26 @@ export function ProyectosSection({ type, locale }: { type: "proyectos-sitios" | 
           >
             {showQR && (
               <div className="flex-shrink-0 flex items-center">
-                <div className="p-2 bg-white rounded-md">
-                  <QRCodeSVG value={project.link || `${project.name}`} size={100} level="H" includeMargin={false} />
+                <div className="flex flex-col items-center gap-1.5">
+                  <a
+                    href={project.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={(e) => {
+                      if (!project.link) {
+                        e.preventDefault()
+                        return
+                      }
+                      incrementQrReads(project)
+                    }}
+                    className="p-2 bg-white rounded-md"
+                    aria-label={locale === "en" ? `Open ${project.name} via QR` : `Abrir ${project.name} por QR`}
+                  >
+                    <QRCodeSVG value={project.link || `${project.name}`} size={100} level="H" includeMargin={false} />
+                  </a>
+                  <span className="text-[11px] font-mono text-muted-foreground">
+                    {locale === "en" ? "Reads" : "Lecturas"}: {qrReadCounts[getProjectQrKey(project)] || 0}
+                  </span>
                 </div>
               </div>
             )}
@@ -398,7 +461,10 @@ export function ProyectosSection({ type, locale }: { type: "proyectos-sitios" | 
                         rel="noopener noreferrer"
                         className="p-2 rounded-md text-muted-foreground hover:text-foreground hover:bg-accent transition-all"
                         aria-label={locale === "en" ? `View ${project.name} on CodePen` : `Ver ${project.name} en CodePen`}
-                        onClick={(e) => e.stopPropagation()}
+                        onClick={(e) => {
+                          e.stopPropagation()
+                          if (showQR) incrementQrReads(project)
+                        }}
                       >
                         <ExternalLink className="h-4 w-4" />
                       </a>
@@ -452,7 +518,10 @@ export function ProyectosSection({ type, locale }: { type: "proyectos-sitios" | 
                         rel="noopener noreferrer"
                         className="p-2 rounded-md text-muted-foreground hover:text-foreground hover:bg-accent transition-all"
                         aria-label={locale === "en" ? `View ${project.name}` : `Ver ${project.name}`}
-                        onClick={(e) => e.stopPropagation()}
+                        onClick={(e) => {
+                          e.stopPropagation()
+                          if (showQR) incrementQrReads(project)
+                        }}
                       >
                         <ExternalLink className="h-4 w-4" />
                       </a>
