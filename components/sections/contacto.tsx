@@ -12,9 +12,9 @@ const fadeUp = {
 }
 
 const socialLinks = [
-  { name: "GitHub", icon: <Github className="h-4 w-4" />, href: "#" },
-  { name: "LinkedIn", icon: <Linkedin className="h-4 w-4" />, href: "#" },
-  { name: "Instagram", icon: <Instagram className="h-4 w-4" />, href: "#" },
+  { name: "GitHub", icon: <Github className="h-4 w-4" />, href: "https://github.com/ZavalaIvan" },
+  { name: "LinkedIn", icon: <Linkedin className="h-4 w-4" />, href: "https://www.linkedin.com/in/ivan-zavala-562ab62a0/" },
+  { name: "Instagram", icon: <Instagram className="h-4 w-4" />, href: "https://www.instagram.com/ivanzavalagutierrez/" },
   { name: "CodePen", icon: <Code2 className="h-4 w-4" />, href: "https://codepen.io/Ivan-Zavala" },
 ]
 
@@ -95,6 +95,8 @@ export function ContactoSection({ locale }: { locale: Locale }) {
             <motion.a
               key={link.name}
               href={link.href}
+              target="_blank"
+              rel="noreferrer"
               initial={{ opacity: 0, x: -10 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.3, delay: 0.35 + i * 0.05 }}

@@ -2,7 +2,7 @@
 
 import { useEffect, useMemo, useRef, useState } from "react"
 import { motion } from "framer-motion"
-import { MapPin, Calendar, Code2 } from "lucide-react"
+import { Blocks, Code2, CodeXml, MapPin, Megaphone, Palette, Rocket } from "lucide-react"
 import { useTheme } from "next-themes"
 import type { Locale } from "@/app/page"
 import { UserIcon } from "@/components/ui/user"
@@ -278,72 +278,188 @@ function TechSphere({ isDark }: { isDark: boolean }) {
   )
 }
 
+type ExperienceIconName = "product" | "senior-dev" | "frontend" | "marketing" | "design"
+
+function ExperienceIcon({ icon, isDark }: { icon: ExperienceIconName; isDark: boolean }) {
+  const icons = {
+    product: Rocket,
+    "senior-dev": CodeXml,
+    frontend: Blocks,
+    marketing: Megaphone,
+    design: Palette,
+  }
+
+  const Icon = icons[icon]
+
+  return (
+    <motion.div
+      animate={{ y: [0, -1.5, 0], scale: [1, 1.04, 1] }}
+      transition={{ duration: 2.6, repeat: Infinity, ease: "easeInOut" }}
+      className={`flex items-center justify-center h-8 w-8 rounded-md shrink-0 ${
+        isDark
+          ? "border border-emerald-400/20 bg-secondary shadow-[0_0_18px_rgba(16,185,129,0.08)]"
+          : "border border-slate-900/12 bg-slate-950/[0.03] shadow-[0_8px_18px_rgba(15,23,42,0.08)]"
+      }`}
+    >
+      <Icon className={isDark ? "h-4 w-4 text-emerald-400" : "h-4 w-4 text-slate-900"} />
+    </motion.div>
+  )
+}
+
 export function SobreMiSection({ locale }: { locale: Locale }) {
   const { theme } = useTheme()
 
   const t = locale === "en"
-    ? {
-        title: "About me",
-        role: "Web Developer & Product Builder",
-        intro: [
-          "I am a full-stack web developer focused on building digital products that create real business impact. I do not just write code, I think in product, users, and outcomes.",
-          "My specialty is taking ideas from zero to a functional product ready for real users. I work with startups and businesses that need to move fast without compromising quality.",
-          "I believe the best technology is invisible: users should not notice the stack, only an experience that works.",
-        ],
-        experience: "Experience",
-        values: "Values",
-      }
-    : {
-        title: "Sobre mi",
-        role: "Desarrollador Web & Product Builder",
-        intro: [
-          "Soy desarrollador web full-stack con enfoque en construir productos digitales que generan impacto real en los negocios. No solo escribo codigo: pienso en el producto, en los usuarios y en los resultados.",
-          "Mi especialidad es llevar ideas desde cero hasta un producto funcional listo para usuarios reales. Trabajo con startups, emprendedores y empresas que necesitan moverse rapido sin comprometer la calidad.",
-          "Creo que la mejor tecnologia es la que desaparece: los usuarios no deberian notar el stack tecnico, solo una experiencia que funciona.",
-        ],
-        experience: "Experiencia",
-        values: "Valores",
-      }
-
+  ? {
+      title: "About me",
+      role: "Full-Stack Web Developer & Product Builder",
+      intro: [
+        "I am a full-stack web developer focused on building digital products that create real business impact. I do not just write code — I think in product, users, and outcomes.",
+        "My specialty is transforming ideas into functional solutions, taking them from zero to a product ready for real users. I work with startups, founders, and companies that need to move fast without compromising quality, scalability, or user experience.",
+        "My background started in design and marketing. I began as a graphic designer focused on branding, building strong and coherent visual identities. Over time, I expanded into digital marketing and brand positioning, understanding not only how a brand looks, but how it communicates, competes, and connects with its audience.",
+        "Today, that strategic foundation defines how I build. Every project integrates design, user experience, brand narrative, and business objectives. I do not just develop interfaces — I build products aligned with a clear vision and commercial intention.",
+        "I believe the best technology is invisible: users should not notice the tech stack, only a clean, intuitive, and efficient experience that simply works.",
+      ],
+      experience: "Experience",
+      values: "Values",
+    }
+  : {
+      title: "Sobre mi",
+      role: "Desarrollador Web Full-Stack & Product Builder",
+      intro: [
+        "Soy desarrollador web full-stack con enfoque en construir productos digitales que generan impacto real en los negocios. No solo escribo codigo: pienso en el producto, en los usuarios y en los resultados.",
+        "Mi especialidad es transformar ideas en soluciones funcionales, llevandolas desde cero hasta un producto listo para usuarios reales. Trabajo con startups, emprendedores y empresas que necesitan moverse rapido sin comprometer la calidad, la escalabilidad ni la experiencia.",
+        "Mi trayectoria comenzo en el diseño y el marketing. Inicie como diseñador grafico enfocado en branding, construyendo identidades visuales solidas y coherentes. Con el tiempo, expandi mi enfoque hacia el marketing digital y el posicionamiento de marca, entendiendo no solo como se ve una marca, sino como se comunica, como compite y como conecta con su audiencia.",
+        "Esa base estrategica hoy define mi manera de desarrollar: cada proyecto que construyo integra diseño, experiencia de usuario, narrativa de marca y objetivos de negocio. No desarrollo solo interfaces; construyo productos alineados con una vision clara y una intencion comercial definida.",
+        "Creo que la mejor tecnologia es la que desaparece: los usuarios no deberian notar el stack tecnico, solo una experiencia intuitiva, limpia y eficiente que simplemente funciona.",
+      ],
+      experience: "Experiencia",
+      values: "Valores",
+    };
+    
   const experienceItems = locale === "en"
     ? [
         {
           role: "Full-Stack Developer & Product Builder",
-          company: "Freelance",
+          icon: "product" as const,
           period: "2022 - Present",
-          description: "Development of MVPs and digital products for startups and businesses.",
+          summary: "Development of MVPs and digital products for startups and growing businesses.",
+          highlights: [
+            "Build digital products end-to-end, from concept through launch.",
+            "Design full-stack architectures focused on scalability.",
+            "Integrate UX, brand narrative, and business goals into each product.",
+            "Develop with a focus on performance, user experience, and market validation.",
+            "Collaborate directly with founders to define product strategy and technical roadmap.",
+          ],
         },
         {
           role: "Senior Web Developer",
-          company: "Digital Agency",
-          period: "2020 - 2022",
-          description: "Technical leadership in high-impact web projects for enterprise clients.",
+          icon: "senior-dev" as const,
+          period: "2019 - 2022",
+          summary: "Led web development for enterprise clients and established brands.",
+          highlights: [
+            "Directed technical decisions and application architecture.",
+            "Built advanced experiences with JavaScript, React, and GSAP.",
+            "Optimized performance and interactive UX.",
+            "Coordinated frontend teams with design and marketing.",
+          ],
         },
         {
           role: "Frontend Developer",
-          company: "Tech Startup",
-          period: "2018 - 2020",
-          description: "Built user interfaces with React and component design systems.",
+          icon: "frontend" as const,
+          period: "2015 - 2019",
+          summary: "Responsible for modern interfaces focused on user experience.",
+          highlights: [
+            "Built applications with HTML, CSS, JavaScript, and WordPress.",
+            "Created reusable component systems.",
+            "Designed and executed UX/UI improvements.",
+            "Worked closely with product and design teams.",
+          ],
+        },
+        {
+          role: "Digital Marketing Specialist",
+          icon: "marketing" as const,
+          period: "2012 - 2015",
+          summary: "Managed digital campaigns and brand positioning in competitive markets.",
+          highlights: [
+            "Defined digital advertising strategies.",
+            "Created conversion-focused content.",
+            "Developed brand positioning and communication.",
+            "Analyzed metrics and optimized results.",
+          ],
+        },
+        {
+          role: "Graphic Designer (Branding & Advertising)",
+          icon: "design" as const,
+          period: "2010 - 2012",
+          summary: "Built visual identities and advertising assets for emerging brands.",
+          highlights: [
+            "Designed corporate identity systems.",
+            "Developed print and digital advertising pieces.",
+            "Defined coherent and strategic visual guidelines.",
+          ],
         },
       ]
     : [
         {
           role: "Desarrollador Full-Stack & Product Builder",
-          company: "Freelance",
+          icon: "product" as const,
           period: "2022 - Presente",
-          description: "Desarrollo de MVPs y productos digitales para startups y negocios.",
+          summary: "Diseño y desarrollo productos digitales end-to-end para startups y negocios en crecimiento.",
+          highlights: [
+            "Construcción de MVPs desde cero hasta lanzamiento.",
+            "Arquitectura full-stack orientada a escalabilidad.",
+            "Integración de UX, narrativa de marca y objetivos comerciales en cada producto.",
+            "Desarrollo con enfoque en performance, experiencia de usuario y validación de mercado.",
+            "Colaboración directa con founders para definir estrategia de producto y roadmap técnico.",
+          ],
         },
         {
           role: "Desarrollador Web Senior",
-          company: "Agencia Digital",
-          period: "2020 - 2022",
-          description: "Liderazgo tecnico en proyectos web de alto impacto para clientes corporativos.",
+          icon: "senior-dev" as const,
+          period: "2019 - 2022",
+          summary: "Lideré el desarrollo técnico de proyectos web para clientes corporativos y marcas consolidadas.",
+          highlights: [
+            "Dirección técnica y toma de decisiones arquitectónicas.",
+            "Desarrollo avanzado con JavaScript, React y animaciones con GSAP.",
+            "Optimización de performance y experiencia interactiva.",
+            "Coordinación de equipo frontend y colaboración con diseño y marketing.",
+          ],
         },
         {
           role: "Desarrollador Frontend",
-          company: "Startup Tech",
-          period: "2018 - 2020",
-          description: "Desarrollo de interfaces de usuario con React y diseno de sistemas de componentes.",
+          icon: "frontend" as const,
+          period: "2015 - 2019",
+          summary: "Responsable del desarrollo de interfaces modernas enfocadas en experiencia de usuario.",
+          highlights: [
+            "Implementación de aplicaciones con HTML, CSS, JavaScript y WordPress.",
+            "Creación de sistemas de componentes reutilizables.",
+            "Diseño y ejecución de mejoras UX/UI.",
+            "Colaboración cercana con equipos de producto y diseño.",
+          ],
+        },
+        {
+          role: "Especialista en Marketing Digital",
+          icon: "marketing" as const,
+          period: "2012 - 2015",
+          summary: "Gestión de campañas digitales y posicionamiento de marca en entornos competitivos.",
+          highlights: [
+            "Estrategias de publicidad digital (ads).",
+            "Creación de contenido orientado a conversión.",
+            "Desarrollo de posicionamiento y comunicación de marca.",
+            "Análisis de métricas y optimización de resultados.",
+          ],
+        },
+        {
+          role: "Diseñador Gráfico (Branding & Publicidad)",
+          icon: "design" as const,
+          period: "2010 - 2012",
+          summary: "Construcción de identidades visuales y materiales publicitarios para marcas emergentes.",
+          highlights: [
+            "Diseño de identidad corporativa.",
+            "Desarrollo de piezas publicitarias impresas y digitales.",
+            "Definición de lineamientos visuales coherentes y estratégicos.",
+          ],
         },
       ]
 
@@ -407,32 +523,6 @@ export function SobreMiSection({ locale }: { locale: Locale }) {
         </div>
       </motion.div>
 
-      <motion.div {...fadeUp} transition={{ duration: 0.5, delay: 0.4 }} className="flex flex-col gap-4">
-        <h2 className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">{t.experience}</h2>
-        <div className="flex flex-col gap-3">
-          {experienceItems.map((exp, i) => (
-            <motion.div
-              key={exp.period}
-              initial={{ opacity: 0, x: -10 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.3, delay: 0.45 + i * 0.1 }}
-              className="flex gap-4 p-4 rounded-lg border border-border bg-card hover:border-muted-foreground/20 transition-all duration-300"
-            >
-              <div className="flex items-center justify-center h-8 w-8 rounded-md bg-secondary shrink-0">
-                <Calendar className="h-3.5 w-3.5 text-muted-foreground" />
-              </div>
-              <div className="flex flex-col gap-1">
-                <h3 className="text-sm font-semibold text-foreground">{exp.role}</h3>
-                <p className="text-xs text-muted-foreground">
-                  {exp.company} <span className="text-border mx-1">|</span> {exp.period}
-                </p>
-                <p className="text-sm text-muted-foreground mt-1">{exp.description}</p>
-              </div>
-            </motion.div>
-          ))}
-        </div>
-      </motion.div>
-
       <motion.div {...fadeUp} transition={{ duration: 0.5, delay: 0.6 }} className="flex flex-col gap-4">
         <h2 className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">{t.values}</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
@@ -444,6 +534,44 @@ export function SobreMiSection({ locale }: { locale: Locale }) {
               <h3 className="text-sm font-semibold text-foreground">{value.title}</h3>
               <p className="text-xs text-muted-foreground leading-relaxed">{value.description}</p>
             </div>
+          ))}
+        </div>
+      </motion.div>
+
+      <motion.div {...fadeUp} transition={{ duration: 0.5, delay: 0.4 }} className="flex flex-col gap-4">
+        <h2 className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">{t.experience}</h2>
+        <div className="flex flex-col gap-3">
+          {experienceItems.map((exp, i) => (
+            <motion.div
+              key={exp.period}
+              initial={{ opacity: 0, x: -10 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.3, delay: 0.45 + i * 0.1 }}
+              className="flex gap-4 p-4 rounded-lg border border-border bg-card hover:border-muted-foreground/20 transition-all duration-300"
+            >
+              <ExperienceIcon icon={exp.icon} isDark={theme === "dark"} />
+              <div className="flex flex-col gap-1">
+                <h3 className="text-sm font-semibold text-foreground">{exp.role}</h3>
+                <p className="text-xs text-muted-foreground">{exp.period}</p>
+                <p className="text-sm text-muted-foreground mt-1">{exp.summary}</p>
+                <ul className="mt-2 flex flex-col gap-2">
+                  {exp.highlights.map((highlight) => (
+                    <li key={highlight} className="flex items-start gap-2.5 text-sm text-muted-foreground leading-relaxed">
+                      <span
+                        className={`mt-1.5 flex h-3.5 w-3.5 items-center justify-center rounded-sm shrink-0 ${
+                          theme === "dark"
+                            ? "border border-emerald-400/50 bg-emerald-400/10 shadow-[0_0_12px_rgba(52,211,153,0.2)]"
+                            : "border border-slate-900/15 bg-slate-950/[0.03] shadow-[0_6px_14px_rgba(15,23,42,0.08)]"
+                        }`}
+                      >
+                        <span className={theme === "dark" ? "h-1.5 w-1.5 rounded-[2px] bg-emerald-400" : "h-1.5 w-1.5 rounded-[2px] bg-slate-900"} />
+                      </span>
+                      <span>{highlight}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </motion.div>
           ))}
         </div>
       </motion.div>

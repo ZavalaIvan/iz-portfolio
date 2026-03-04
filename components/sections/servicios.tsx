@@ -93,7 +93,7 @@ const getServiciosData = (locale: Locale): Record<string, ServiceData> => ({
   },
   "servicios-soporte": {
     title: locale === "en" ? "Technical Support" : "Soporte Tecnico",
-    subtitle: locale === "en" ? "Your product always running" : "Tu producto siempre funcionando",
+    subtitle: locale === "en" ? "Your business always running" : "Tu negocio siempre funcionando",
     icon: <AudioLinesIcon size={20} />,
     description:
       locale === "en"
@@ -105,16 +105,16 @@ const getServiciosData = (locale: Locale): Record<string, ServiceData> => ({
           "Dependency updates",
           "Performance optimization",
           "Uptime and error monitoring",
-          "Iterative UX improvements",
-          "Priority support via Slack or email",
+          "Hosting and business email solutions",
+          "Priority support via remote connection",
         ]
       : [
           "Mantenimiento preventivo y correctivo",
           "Actualizaciones de dependencias",
           "Optimizacion de rendimiento",
           "Monitoreo de uptime y errores",
-          "Mejoras iterativas de UX",
-          "Soporte prioritario por Slack o email",
+          "Soluciones de hosting y correo empresarial",
+          "Soporte prioritario por conexión remota",
         ],
     cta: locale === "en" ? "Request support" : "Solicita soporte",
     includesTitle: locale === "en" ? "What's included?" : "Que incluye?",
@@ -125,25 +125,25 @@ export function ServiciosSection({ type, onNavigate, locale }: { type: "servicio
   const data = getServiciosData(locale)[type]
   const automationExamples = locale === "en"
     ? [
-        { title: "Sales lead flow", description: "Automatically capture leads from forms, score them, and send them to your CRM with instant notifications.", image: "/gifs/web-template.gif" },
-        { title: "Billing and follow-up", description: "Generate invoices, send reminders, and update payment status without manual tracking.", image: "/gifs/web-template.gif" },
-        { title: "Executive reporting", description: "Build daily and weekly reports from multiple tools and deliver them automatically to your team.", image: "/gifs/web-template.gif" },
+        { title: "Sales lead flow", description: "Automatically capture leads from forms, score them, and send them to your CRM with instant notifications.", image: "/zapier-workflow.webp" },
+        { title: "Billing and follow-up", description: "Generate invoices, send reminders, and update payment status without manual tracking.", image: "/n8n-workflow.png" },
+        { title: "Executive reporting", description: "Build daily and weekly reports from multiple tools and deliver them automatically to your team.", image: "/reportes-auto.webp" },
       ]
     : [
-        { title: "Flujo de leads de ventas", description: "Captura leads desde formularios, calificalos y envialos a tu CRM con notificaciones inmediatas.", image: "/gifs/web-template.gif" },
-        { title: "Facturacion y seguimiento", description: "Genera facturas, envia recordatorios y actualiza estados de pago sin gestion manual.", image: "/gifs/web-template.gif" },
-        { title: "Reportes ejecutivos", description: "Construye reportes diarios y semanales desde varias herramientas y entregalos automaticamente a tu equipo.", image: "/gifs/web-template.gif" },
+        { title: "Flujo de leads de ventas", description: "Captura leads desde formularios, calificalos y envialos a tu CRM con notificaciones inmediatas.", image: "/zapier-workflow.webp" },
+        { title: "Facturacion y seguimiento", description: "Genera facturas, envia recordatorios y actualiza estados de pago sin gestion manual.", image: "/n8n-workflow.png" },
+        { title: "Reportes ejecutivos", description: "Construye reportes diarios y semanales desde varias herramientas y entregalos automaticamente a tu equipo.", image: "/reportes-auto.webp" },
       ]
   const supportExamples = locale === "en"
     ? [
-        { title: "Mail server + web support", description: "Technical support focused on email server setup, DNS records (SPF, DKIM, DMARC), deliverability issues, and website incidents.", image: "/gifs/web-template.gif" },
-        { title: "Performance and stability", description: "Continuous support to detect bottlenecks, reduce downtime, and keep your web platform stable.", image: "/gifs/web-template.gif" },
-        { title: "Maintenance and updates", description: "Dependency updates, security patches, and preventive checks to avoid production issues.", image: "/gifs/web-template.gif" },
+        { title: "Email and hosting support", description: "Technical support focused on email server setup, DNS records (SPF, DKIM, DMARC), deliverability issues, and website incidents.", image: "/hosting-soporte.png" },
+        { title: "Performance and stability", description: "Continuous support to detect bottlenecks, reduce downtime, and keep your web platform stable.", image: "/console-informe-rendimiento.webp" },
+        { title: "Maintenance and updates", description: "Dependency updates, security patches, and preventive reviews to avoid issues with computer equipment.", image: "/windows-prob.jpg" },
       ]
     : [
-        { title: "Soporte de correo + web", description: "Soporte tecnico enfocado en configuracion de servidores de correo, registros DNS (SPF, DKIM, DMARC), entregabilidad e incidencias web.", image: "/gifs/web-template.gif" },
-        { title: "Rendimiento y estabilidad", description: "Soporte continuo para detectar cuellos de botella, reducir caidas y mantener estable tu plataforma web.", image: "/gifs/web-template.gif" },
-        { title: "Mantenimiento y actualizaciones", description: "Actualizacion de dependencias, parches de seguridad y revisiones preventivas para evitar problemas en produccion.", image: "/gifs/web-template.gif" },
+        { title: "Soporte de correo y hosting", description: "Soporte tecnico enfocado en configuracion de servidores de correo, registros DNS (SPF, DKIM, DMARC), entregabilidad e incidencias web.", image: "/hosting-soporte.png" },
+        { title: "Rendimiento y estabilidad", description: "Soporte continuo para detectar cuellos de botella, reducir caidas y mantener estable tu plataforma web.", image: "/console-informe-rendimiento.webp" },
+        { title: "Mantenimiento y actualizaciones", description: "Actualizacion de dependencias, parches de seguridad y revisiones preventivas para evitar problemas con equipos de computo.", image: "/windows-prob.jpg" },
       ]
 
   return (

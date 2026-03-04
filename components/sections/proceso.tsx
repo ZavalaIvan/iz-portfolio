@@ -3,6 +3,7 @@
 import { useState } from "react"
 import { motion } from "framer-motion"
 import { ArrowRight, Phone } from "lucide-react"
+import { useTheme } from "next-themes"
 import type { Locale } from "@/app/page"
 import { WorkflowIcon } from "@/components/ui/workflow"
 import { DollarSignIcon } from "@/components/ui/dollar-sign"
@@ -179,6 +180,7 @@ const getPricingModels = (locale: Locale) =>
       ]
 
 export function MetodologiaSection({ locale }: { locale: Locale }) {
+  const { theme } = useTheme()
   const steps = getSteps(locale)
 
   return (
@@ -209,7 +211,13 @@ export function MetodologiaSection({ locale }: { locale: Locale }) {
               <div className="absolute left-[19px] top-10 bottom-0 w-px bg-border" />
             )}
 
-            <div className="flex items-center justify-center h-10 w-10 rounded-full bg-secondary border border-border text-xs font-mono text-muted-foreground shrink-0 transition-all duration-300 group-hover:border-white/80 group-hover:bg-white/10 group-hover:text-white group-hover:[text-shadow:0_0_8px_rgba(255,255,255,0.95)] group-hover:shadow-[0_0_10px_rgba(255,255,255,0.75),0_0_24px_rgba(255,255,255,0.45),inset_0_0_12px_rgba(255,255,255,0.35)]">
+            <div
+              className={`flex items-center justify-center h-10 w-10 rounded-full bg-secondary border border-border text-xs font-mono text-muted-foreground shrink-0 transition-all duration-300 ${
+                theme === "dark"
+                  ? "group-hover:border-white/80 group-hover:bg-white/10 group-hover:text-white group-hover:[text-shadow:0_0_8px_rgba(255,255,255,0.95)] group-hover:shadow-[0_0_10px_rgba(255,255,255,0.75),0_0_24px_rgba(255,255,255,0.45),inset_0_0_12px_rgba(255,255,255,0.35)]"
+                  : "group-hover:border-slate-900/50 group-hover:bg-slate-950/[0.06] group-hover:text-slate-900 group-hover:[text-shadow:0_0_8px_rgba(15,23,42,0.22)] group-hover:shadow-[0_0_10px_rgba(15,23,42,0.18),0_0_24px_rgba(15,23,42,0.1),inset_0_0_12px_rgba(15,23,42,0.08)]"
+              }`}
+            >
               {step.number}
             </div>
 
